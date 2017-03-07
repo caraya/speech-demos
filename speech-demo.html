@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Speech Demo</title>
+</head>
+<body>
+
+<form id="form">
+  <fieldset>
+    <legend>Basic User Information</legend>
+    <label for="username">Username</label>
+    <input id="username" type="text" placeholder="User Name">
+    <label for="password">Password</label>
+    <input id="password" type="password" placeholder="password">
+  </fieldset>
+</form>
+
+<script>
+// Setup the Username Empty Error function
+function speakUsernameEmptyError() {
+  let msg1 = new SpeechSynthesisUtterance();
+
+  msg1.text = "The Username field can not be empty";
+  msg1.lang = 'en-US';
+
+  speechSynthesis.speak(msg1);
+}
+
+// Setup the Password Empty Error function
+function speakPasswordEmptyError() {
+  let msg2 = new SpeechSynthesisUtterance();
+  msg2.text = "The Password field can not be empty";
+  msg2.lang = 'en-US';
+
+  speechSynthesis.speak(msg2);
+}
+
+// Assign variables to hold the elements
+let username = document.getElementById('username');
+let password = document.getElementById('password');
+
+// Add blur event listener to the username field
+username.addEventListener('blur', function() {
+  // If the field is empty
+  if (username.value.length <= 0) {
+    // Put a 1 pixel red border on the input field
+    username.style.border = '1px solid red';
+    // Speak the error as specified in the
+    // speakUsernameEmptyError function
+    speakUsernameEmptyError();
+  } else {
+    username.style.border = '1px solid black';
+  }
+});
+
+// Add blur event listener to the password field
+password.addEventListener('blur', function() {
+  // If the field is empty
+  if (password.value.length <= 0) {
+    // Put a 1 pixel red border on the input field
+    password.style.border = '1px solid red';
+    // Speak the error as specified in the
+    // speakPasswordEmptyError function
+    speakPasswordEmptyError();
+  } else {
+    password.style.border = '1px solid black';
+  }
+})
+
+
+</script>
+</body>
+</html>
